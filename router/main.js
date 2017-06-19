@@ -3,11 +3,11 @@ module.exports = function(app, db)
 {
 
     // 테스트 메인 화면
-	app.get('/',function(req,res){
-		res.render('index', {
-			title: "Crash Event 관리"
-		});
-	});
+	// app.get('/',function(req,res){
+	// 	res.render('index', {
+	// 		title: "Crash Event 관리"
+	// 	});
+	// });
 
     // 리스트 조회
     app.get('/list', function (req, res) {
@@ -20,26 +20,32 @@ module.exports = function(app, db)
     });
 
     // 한건 조회
-    app.get('/getEvent/:eventid', function(req, res){
-        console.log('/getEvent/:eventid');
+    app.get('/getEvent/:eventID', function(req, res){
+        console.log('/getEvent/:eventID');
 
 		// GET 방식은 req.query 를 사용하여 파라미터 정보 취득
-        var eventid = req.query.eventid;
+        var eventID = req.params.eventID || req.query.eventID;
 		
-		//var crash_data = db.crashs.find({eventid: eventid});
-		var crash_data = db.crashs.find({'eventid': eventid});
+        console.log('query.eventID='+req.query.eventID);// ok
+        console.log('body.eventID='+req.body.eventID);
+        console.log('params.eventID='+req.params.eventID);// ?
+        console.log('eventID='+eventID);
+
+		//var crash_data = db.crashs.find({eventID: eventID});
+		var crash_data = db.crashs.find({'eventID': eventID});
 		console.log( crash_data[0] );
 		res.json(crash_data[0]);
 
     });
 
     // 등록
-    app.post('/addEvent/:eventid', function(req, res){
-        console.log('/addEvent/:eventid');
+    app.post('/addEvent/:eventID', function(req, res){
+        console.log('/addEvent/:eventID');
 
         var result = {  };
 		// POST 방식은 req.body 를 사용하여 파라미터 정보 취득
-        var eventid = req.body.eventid;
+        var eventID = req.params.eventID || req.body.eventID;
+        console.log('eventID='+eventID);
 
 		console.log(req.body);
 		db.crashs.save(req.body);
@@ -51,14 +57,15 @@ module.exports = function(app, db)
 
 
     // 수정(등록)
-    app.put('/mergeEvent/:eventid', function(req, res){
-        console.log('/mergeEvent/:eventid');
+    app.put('/mergeEvent/:eventID', function(req, res){
+        console.log('/mergeEvent/:eventID');
 
         var result = {  };
 		// PUT 방식은 req.body 를 사용하여 파라미터 정보 취득
-        var eventid = req.body.eventid;
+        var eventID = req.params.eventID || req.body.eventID;
+        console.log('eventID='+eventID);
 
-		var old_crash_data = db.crashs.find({'eventid': eventid});
+		var old_crash_data = db.crashs.find({'eventID': eventID});
 		console.log( old_crash_data[0] );
 		console.log( req.body );
 		
@@ -85,14 +92,15 @@ module.exports = function(app, db)
     });
 
     // 삭제
-    app.delete('/deleteEvent/:eventid', function(req, res){
-        console.log('/deleteEvent/:eventid');
+    app.delete('/deleteEvent/:eventID', function(req, res){
+        console.log('/deleteEvent/:eventID');
 
         var result = { };
 		// DELETE 방식은 req.body 를 사용하여 파라미터 정보 취득
-        var eventid = req.body.eventid;
+        var eventID = req.params.eventID || req.body.eventID;
+        console.log('eventID='+eventID);
 		
-		db.crashs.remove({'eventid': eventid});
+		db.crashs.remove({'eventID': eventID});
 		result["success"] = 1;
 		res.json(result);
 

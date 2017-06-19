@@ -2,7 +2,7 @@
 // Event 객체
 function Event() {
 	return JSON.stringify({
-		"eventid":$("#eventid").val(),
+		"eventID":$("#eventID").val(),
 		"mobileOS":$("#mobileOS").val(),
 		"phone":$("#phone").val()
 	});
@@ -13,7 +13,7 @@ function addEvent () {
 	// http://api.jquery.com/jQuery.ajax/ 참고
 	jQuery.ajax({
 		type: "POST",
-		url: "/addEvent/"+$("#eventid").val(),
+		url: "/addEvent/"+$("#eventID").val(),
 		data: Event(),
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
@@ -32,7 +32,7 @@ function addEvent () {
 function updateEvent () {
 	jQuery.ajax({
 		type: "PUT",
-		url: "/mergeEvent/"+$("#eventid").val(),
+		url: "/mergeEvent/"+$("#eventID").val(),
 		data: Event(),
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
@@ -55,9 +55,9 @@ function updateEvent () {
 function deleteEvent (eventId) {
 	jQuery.ajax({
 		type: "DELETE",
-		url: "/deleteEvent/"+eventid,
+		url: "/deleteEvent/"+eventID,
 		contentType: "application/x-www-form-urlencoded; charset=utf-8",
-		data: "eventid="+eventId,
+		data: "eventID="+eventId,
 		dataType: "json",
 		success: function (data, status, jqXHR) {
 			// do something
@@ -74,14 +74,14 @@ function deleteEvent (eventId) {
 function getEvent (eventId) {
 	jQuery.ajax({
 		type: "GET",
-		url: "/getEvent/"+eventid,
+		url: "/getEvent/"+eventID,
 		contentType: "application/json; charset=utf-8",
-		data: "eventid="+eventId,
+		data: "eventID="+eventId,
 		dataType: "json",
 		success: function (data, status, jqXHR) {
 			//alert(["mobileOS"]);
 			//alert(status+"/"+jqXHR.status+"/"+jqXHR.statusText);
-			$("#eventid").val(data["eventid"]);
+			$("#eventID").val(data["eventID"]);
 			$("#mobileOS").val(data["mobileOS"]);
 			$("#phone").val(data["phone"]);
 		},
@@ -103,11 +103,11 @@ function getEvents () {
 			returnData = "<table style='font-size:10pt;'><tr><th>전체 목록</th></tr>";
 			returnData += "<tr><td>ID</td><td>이름</td><td>전화번호</td><td>기능</td></tr>";
 			for (var i = 0; i < data.length; i++) {
-				returnData += "<tr><td><a href='#' onClick='getEvent("+data[i]["eventid"]+")' >" 
-						   + data[i]["eventid"] + "</a></td><td>"
+				returnData += "<tr><td><a href='#' onClick='getEvent("+data[i]["eventID"]+")' >" 
+						   + data[i]["eventID"] + "</a></td><td>"
 						   + data[i]["mobileOS"] + "</td><td align='right'>"
 						   + data[i]["phone"] + "</td><td>"
-						   + "<input type='button' value='삭제' onClick='deleteEvent("+ data[i]["eventid"] +")' />"
+						   + "<input type='button' value='삭제' onClick='deleteEvent("+ data[i]["eventID"] +")' />"
 						   + "</td></tr>";
 			}
 
