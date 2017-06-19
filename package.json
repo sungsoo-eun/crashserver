@@ -2,7 +2,7 @@
   "name": "crashServer",
   "version": "1.0.0",
   "scripts": {
-    "prepublish": "zip -r target/crash_server.zip node_modules data public router views manifest.json *.js"
+    "prepublish": "zip -r target/crashserver.zip node_modules data public router views manifest.json *.js"
   },
   "dependencies": {
     "body-parser": "~1.14.2",
