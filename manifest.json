@@ -1,0 +1,6 @@
+{
+    "runtime": {
+        "majorVersion": "1.0.0"
+    },
+    "command": "node server.js verbose=true"
+}
