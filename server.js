@@ -26,3 +26,4 @@ app.use(express.static('public'));
 
 // ./router/main.js 파일의 module.exports한 routing 정보를 router 변수에 담는다.
 var router = require('./router/main')(app, db);
+
